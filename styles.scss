@@ -1,0 +1,445 @@
+// Variáveis de cores
+$primary-color: #00a86b;
+$secondary-color: #00ff9d;
+$dark-bg: rgba(0, 0, 0, 0.7);
+$text-color: #fff;
+$subtitle-color: #ccc;
+$error-color: #ff4d4d;
+
+// Mixins
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin card-style {
+    background-color: $dark-bg;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+// Reset e estilos globais
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url('./images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    color: $text-color;
+    min-height: 100vh;
+    @include flex-center;
+    padding: 20px;
+    position: relative;
+}
+
+// Container principal
+.container {
+    @include card-style;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+
+    h1 {
+        margin-bottom: 10px;
+        color: $primary-color;
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        margin-bottom: 30px;
+        color: $subtitle-color;
+    }
+}
+
+// Seção de entrada
+.input-container {
+    margin-bottom: 30px;
+    text-align: left;
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: $primary-color;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid $primary-color;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: $text-color;
+        font-size: 16px;
+        transition: all 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: $secondary-color;
+            box-shadow: 0 0 10px rgba($primary-color, 0.5);
+        }
+    }
+}
+
+// Botões
+.buttons {
+    margin: 30px 0;
+    text-align: center;
+}
+
+// Resultado
+.result-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: rgba($primary-color, 0.2);
+    border-radius: 10px;
+    border: 1px solid $primary-color;
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    #result {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $secondary-color;
+    }
+}
+
+/* Estilos do carrossel */
+.ingredients-carousel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid $primary-color;
+    z-index: 1000;
+    box-shadow: 0 0 30px rgba(0, 168, 107, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 10px 0;
+    z-index: 1;
+
+    h2 {
+        color: $primary-color;
+        font-size: 1.5rem;
+    }
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: $primary-color;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 5px;
+
+    &:hover {
+        color: $secondary-color;
+        transform: scale(1.1);
+    }
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.carousel-btn {
+    background: rgba($primary-color, 0.2);
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    flex-shrink: 0;
+
+    &:hover {
+        background: $primary-color;
+        color: $text-color;
+        transform: scale(1.1);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.ingredients-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+
+    th,
+    td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba($primary-color, 0.3);
+    }
+
+    th {
+        background-color: rgba($primary-color, 0.2);
+        color: $primary-color;
+        font-weight: bold;
+        position: sticky;
+        top: 60px;
+    }
+
+    tr:hover {
+        background-color: rgba($primary-color, 0.1);
+    }
+
+    td:nth-child(2) {
+        text-align: right;
+        font-weight: bold;
+        color: $secondary-color;
+    }
+}
+
+/* Overlay para quando o carrossel estiver aberto */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Estilos do botão blob */
+$blob-color: $primary-color;
+$blob-text-hover: $text-color;
+$border-width: 2px;
+
+.blob-btn {
+    $numOfBlobs: 4;
+    z-index: 1;
+    position: relative;
+    padding: 20px 46px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    color: $blob-color;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    transition: color 0.5s;
+    cursor: pointer;
+    border-radius: 30px;
+
+    &:before {
+        content: "";
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border: $border-width solid $blob-color;
+        border-radius: 30px;
+    }
+
+    &:after {
+        content: "";
+        z-index: -2;
+        position: absolute;
+        left: $border-width * 1.5;
+        top: $border-width * 1.5;
+        width: 100%;
+        height: 100%;
+        transition: all 0.3s 0.2s;
+        border-radius: 30px;
+    }
+
+    &:hover {
+        color: $blob-text-hover;
+        border-radius: 30px;
+
+        &:after {
+            transition: all 0.3s;
+            left: 0;
+            top: 0;
+            border-radius: 30px;
+        }
+    }
+
+    &__inner {
+        z-index: -1;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        background: $text-color;
+    }
+
+    &__blobs {
+        position: relative;
+        display: block;
+        height: 100%;
+        filter: url('#goo');
+    }
+
+    &__blob {
+        position: absolute;
+        top: $border-width;
+        width: 25%;
+        height: 100%;
+        background: $blob-color;
+        border-radius: 100%;
+        transform: translate3d(0, 150%, 0) scale(1.7);
+        transition: transform 0.45s;
+
+        @supports (filter: url('#goo')) {
+            transform: translate3d(0, 150%, 0) scale(1.4);
+        }
+
+        &:nth-child(1) {
+            left: 0%;
+            transition-delay: 0s;
+        }
+
+        &:nth-child(2) {
+            left: 30%;
+            transition-delay: 0.08s;
+        }
+
+        &:nth-child(3) {
+            left: 60%;
+            transition-delay: 0.16s;
+        }
+
+        &:nth-child(4) {
+            left: 90%;
+            transition-delay: 0.24s;
+        }
+
+        .blob-btn:hover & {
+            transform: translateZ(0) scale(1.7);
+
+            @supports (filter: url('#goo')) {
+                transform: translateZ(0) scale(1.4);
+            }
+        }
+    }
+}
+
+/* Mensagem de erro */
+.error-message {
+    color: $error-color;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+    animation: shake 0.5s;
+
+    @keyframes shake {
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        20%,
+        60% {
+            transform: translateX(-5px);
+        }
+
+        40%,
+        80% {
+            transform: translateX(5px);
+        }
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .ingredients-carousel {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .ingredients-table {
+
+        th,
+        td {
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+    }
+
+    .blob-btn {
+        padding: 15px 30px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .carousel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}

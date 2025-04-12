@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alquimia PotionCraft</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Alquimia PotionCraft</h1>
+        <p class="subtitle">Combine ingredientes para calcular energia mágica</p>
+
+        <div class="input-container">
+            <label for="ingredients">Digite os ingredientes (separados por vírgula):</label>
+            <input type="text" id="ingredients" placeholder="Olho de Sapo, Escama de Dragão, Lodo de Sapo...">
+        </div>
+
+        <div class="buttons">
+            <button class="blob-btn" id="calculate-btn">
+                Calcular Energia
+                <span class="blob-btn__inner">
+                    <span class="blob-btn__blobs">
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                        <span class="blob-btn__blob"></span>
+                    </span>
+                </span>
+            </button>
+        </div>
+
+        <div class="result-container">
+            <h2>Energia Mágica:</h2>
+            <div id="result">0 unidades</div>
+        </div>
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo">
+                </feColorMatrix>
+                <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+            </filter>
+        </defs>
+    </svg>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
